@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý danh sách công việc</title>
+</head>
+<body>
+
+    <h1>Danh sách công việc</h1>
+    
+    <!-- Phần nhập công việc mới -->
+    <input type="text" id="new-task" placeholder="Nhập công việc mới">
+    <button onclick="addTask()">Thêm công việc</button>
+
+    <!-- Danh sách công việc -->
+    <ul id="task-list"></ul>
+
+    <script>
+        // Bước 1: Thêm công việc vào danh sách
+        function addTask() {
+            let taskInput = document.getElementById('new-task');
+            let taskValue = taskInput.value.trim();
+
+            // Kiểm tra xem có nhập gì không
+            if (taskValue === "") {
+                alert("Vui lòng nhập công việc.");
+                return;
+            }
+
+            // Tạo một phần tử li mới
+            let li = document.createElement('li');
+
+            // Thêm nội dung cho li
+            li.innerHTML = taskValue + 
+                '<button onclick="deleteTask(this)">Xóa</button>' + 
+                '<button onclick="toggleComplete(this)">Hoàn thành</button>';
+
+            // Thêm công việc mới vào danh sách
+            document.getElementById('task-list').appendChild(li);
+
+            // Xóa nội dung trong ô nhập
+            taskInput.value = "";
+        }
+
+        // Bước 2: Xóa công việc
+        function deleteTask(element) {
+            let li = element.parentElement;
+            li.remove();
+        }
+
+        // Bước 3: Đánh dấu công việc đã hoàn thành
+        function toggleComplete(element) {
+            let li = element.parentElement;
+            li.classList.toggle('completed');
+        }
+    </script>
+
+</body>
+</html>

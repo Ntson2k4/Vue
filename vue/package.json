@@ -1,0 +1,9 @@
+{
+  "devDependencies": {
+    "@babel/preset-env": "^7.25.8"
+  },
+  "dependencies": {
+    "vue-router": "^4.4.5",
+    "vuex": "^4.0.2"
+  }
+}

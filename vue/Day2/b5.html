@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tìm kiếm bài đăng</title>
+</head>
+<body>
+
+    <h1>Tìm kiếm bài đăng</h1>
+    <input type="number" id="postId" placeholder="Nhập ID bài đăng (1-100)">
+    <button onclick="searchPost()">Tìm kiếm</button>
+
+    <div class="result" id="result">
+        <!-- Kết quả sẽ được hiển thị ở đây -->
+    </div>
+
+    <script>
+        async function searchPost() {
+            const postId = document.getElementById('postId').value;
+            const resultDiv = document.getElementById('result');
+
+            // Xóa kết quả cũ
+            resultDiv.innerHTML = '';
+
+            // Kiểm tra nếu ID không hợp lệ
+            if (!postId || postId <= 0 || postId > 100) {
+                resultDiv.innerHTML = '<p>Vui lòng nhập một ID hợp lệ (từ 1 đến 100)</p>';
+                return;
+            }
+
+            try {
+                // Gửi yêu cầu GET đến API
+                const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`);
+                
+                // Kiểm tra nếu phản hồi không thành công
+                if (!response.ok) {
+                    throw new Error('Bài đăng không tìm thấy');
+                }
+
+                // Chuyển đổi dữ liệu nhận được sang định dạng JSON
+                const post = await response.json();
+
+                // Hiển thị kết quả trên giao diện người dùng
+                resultDiv.innerHTML = `
+                    <h2>${post.title}</h2>
+                    <p>${post.body}</p>
+                `;
+            } catch (error) {
+                // Hiển thị thông báo lỗi nếu có
+                resultDiv.innerHTML = `<p>Lỗi: ${error.message}</p>`;
+            }
+        }
+    </script>
+
+</body>
+</html>

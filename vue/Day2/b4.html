@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Đối tượng user
+        const user = {
+        name: 'John Doe',
+        age: 30,
+        email: 'john.doe@example.com',
+        address: {
+            city: 'New York',
+            country: 'USA'
+        }
+        };
+
+        // Trích xuất các thuộc tính name, age và email từ đối tượng user
+        const { name, age, email } = user;
+        console.log(name);  // John Doe
+        console.log(age);   // 30
+        console.log(email); // john.doe@example.com
+
+        // Trích xuất city từ thuộc tính address
+        const { address: { city } } = user;
+        console.log(city);  // New York
+
+    </script>
+
+    <script>
+        // Mảng fruits
+        const fruits = ['Apple', 'Banana', 'Orange', 'Mango'];
+
+        // Trích xuất các phần tử đầu tiên và thứ hai
+        const [firstFruit, secondFruit] = fruits;
+        console.log(firstFruit);  // Apple
+        console.log(secondFruit); // Banana
+
+        // Trích xuất các phần tử còn lại bằng Rest operator
+        const [,, ...otherFruits] = fruits;
+        console.log(otherFruits); // ['Orange', 'Mango']
+
+    </script>
+</body>
+</html>
